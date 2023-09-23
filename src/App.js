@@ -6,6 +6,7 @@ import AuthPage from './pages/AuthPage';
 import HomePage from './pages/HomePage';
 
 function App() {
+
   return (
     <Layout>
       <Switch>
@@ -16,7 +17,7 @@ function App() {
           <AuthPage />
         </Route>
         <Route path='/profile'>
-          <UserProfile />
+        <UserProfile />
         </Route>
       </Switch>
     </Layout>
