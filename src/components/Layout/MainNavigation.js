@@ -6,6 +6,10 @@ import { Context } from '../../stores/Context';
 
 const MainNavigation = () => {
   const ctx = useContext(Context);
+
+  const logoutHandler = () => {
+    ctx.logout();
+  }
   return (
     <header className={classes.header}>
       <Link to='/'>
@@ -22,7 +26,7 @@ const MainNavigation = () => {
           </li>}
           
           {ctx.isLoggedIn && <li>
-            <button>Logout</button>
+            <button onClick={logoutHandler}>Logout</button>
           </li>}
         </ul>
       </nav>

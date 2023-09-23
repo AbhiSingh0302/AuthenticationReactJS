@@ -1,8 +1,10 @@
 import { useContext, useRef } from 'react';
 import classes from './ProfileForm.module.css';
 import { Context } from '../../stores/Context';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ProfileForm = () => {
+  const history = useHistory();
   const newPasswordInputRef = useRef('');
   const ctx = useContext(Context);
 
@@ -21,7 +23,21 @@ const ProfileForm = () => {
         'Content-Type': 'application/json'
       }
     }).then(res => {
-
+      if(res.ok){
+        return res.json();
+      }
+      return res.json().then(data => {
+        let errorMessage = 'Authentication Failed!';
+        if(data && data.error && data.error.message){
+          errorMessage = data.error.message;
+        }
+        throw new Error(errorMessage);
+      })
+    }).then(data => {
+      console.log(data);
+      history.replace('/');
+    }).catch(err => {
+      alert(err.message);
     })
   }
 
